@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    internal class Fornecedor
+    public class Fornecedor
     {
+        public int IdFornecedor { get; set; }
+        public string Nome { get; set; } = string.Empty;
     }
 }
