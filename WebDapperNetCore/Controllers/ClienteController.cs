@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 
 namespace WebDapperNetCore.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
     {
         public readonly IClienteService _clienteService;
@@ -15,18 +18,14 @@ namespace WebDapperNetCore.Controllers
         public ActionResult Index()
         {
             var result = _clienteService.GetAsnyClientes();
-
-            if (result != null)
-            {
-
-            }
            return View(result);
         }
 
         // GET: ClienteController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var result = _clienteService.GetAsnyCliente(id);
+            return View(result);
         }
 
         // GET: ClienteController/Create
@@ -38,10 +37,11 @@ namespace WebDapperNetCore.Controllers
         // POST: ClienteController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind("IdCliente,Nome")] Cliente cliente)
         {
             try
             {
+                var result = _clienteService.InsertAsnyCliente(cliente);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -53,16 +53,18 @@ namespace WebDapperNetCore.Controllers
         // GET: ClienteController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var result = _clienteService.GetAsnyCliente(id);
+            return View(result);
         }
 
         // POST: ClienteController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Cliente cliente)
         {
             try
             {
+                _clienteService.UpdateAsnyCliente(cliente);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -74,7 +76,8 @@ namespace WebDapperNetCore.Controllers
         // GET: ClienteController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var result = _clienteService.GetAsnyCliente(id);
+            return View(result);
         }
 
         // POST: ClienteController/Delete/5
@@ -84,6 +87,10 @@ namespace WebDapperNetCore.Controllers
         {
             try
             {
+                var resultCliente = _clienteService.GetAsnyCliente(id);
+
+                bool result =  _clienteService.DeleteAsnyCliente(resultCliente.IdCliente);
+
                 return RedirectToAction(nameof(Index));
             }
             catch

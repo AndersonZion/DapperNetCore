@@ -30,16 +30,16 @@ namespace Service.Services
 
         public Cliente InsertAsnyCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+            return _clienteRepository.InsertAsnyCliente(cliente);
         }
 
         public Cliente UpdateAsnyCliente(Cliente cliente)
         {
-            throw new NotImplementedException();
+            return _clienteRepository.UpdateAsnyCliente(cliente);
         }
         public bool DeleteAsnyCliente(int id)
         {
-            throw new NotImplementedException();
+            return _clienteRepository.DeleteAsnyCliente(id);
         }
     }
 }

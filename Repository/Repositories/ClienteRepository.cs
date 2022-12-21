@@ -46,9 +46,9 @@ namespace Repository.Repositories
         public Cliente InsertAsnyCliente(Cliente cliente)
         {
 
-            var query = "INSERT INTO Companies (Nome) VALUES (@Nome)"+"SELECT CAST(SCOPE_IDENTITY() as int)";
+            var query = "INSERT INTO Clientes (Nome) VALUES (@Nome)"+"SELECT CAST(SCOPE_IDENTITY() as int)";
             var parameters = new DynamicParameters();
-            parameters.Add("Nome", cliente.Nome, DbType.String);
+            parameters.Add("Name", cliente.Nome, DbType.String);
 
             using (var connectionDb = _connectionFactory.Connection())
             {
