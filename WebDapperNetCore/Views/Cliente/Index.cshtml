@@ -4,39 +4,107 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Listas de Clientes</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <div class="btn-group mr-2">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                <li class="breadcrumb-item active">Cliente</li>
+                @*<li class="breadcrumb-item"><a href="#"> Home2</a></li>*@
+            </ol>
+        </div>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">
+        <a class="btn btn-sm btn-outline-secondary" asp-action="Create">
+            Adicionar Cliente
+        </a>
+    </h1>
+    @*<div class="btn-toolbar mb-2 mb-md-0">
+        <a class="btn btn-sm btn-outline-secondary" asp-action="Create">
+            Adicionar Cliente
+        </a>
+    </div>*@
+</div>
+
 <table class="table">
+
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCliente)
-            </th>
+            <th>Sr. No.</th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
-            <th></th>
+
+            <th>Açôes</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCliente)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @*Todo:*@
-                    @Html.ActionLink("Edit", "Edit", new {  id=item.IdCliente  }) |
-                    @Html.ActionLink("Details", "Details", new { id=item.IdCliente  }) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.IdCliente })
-            </td>
-        </tr>
-}
+        @{
+            int count = 1;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @count
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.IdCliente" class="btn btn-outline-secondary btn-sm">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.IdCliente" class="btn btn-outline-secondary btn-sm">Delete</a>
+                    <a asp-action="Details" asp-route-id="@item.IdCliente" class="btn btn-outline-secondary btn-sm">Details</a>
+                    
+                </td>
+            </tr>
+            count++;
+        }
     </tbody>
 </table>
+
+
+
+
+
+<!-- modal placeholders-->
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id='modal-edit-content'></div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"> Cadastro de Produtos</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>One fine body…</p>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+

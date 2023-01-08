@@ -23,9 +23,9 @@ namespace Service.Services
            return _clienteRepository.GetAsnyCliente(id);
         }
 
-        public IEnumerable<Cliente> GetAsnyClientes()
+        public async Task<IEnumerable<Cliente>> GetAsnyClientes()
         {
-            return _clienteRepository.GetAsnyClientes();
+            return await _clienteRepository.GetAsnyClientes();
         }
 
         public Cliente InsertAsnyCliente(Cliente cliente)

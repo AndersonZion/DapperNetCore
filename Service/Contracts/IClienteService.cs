@@ -13,6 +13,7 @@ namespace Service.Contracts
         Cliente UpdateAsnyCliente(Cliente cliente);
         bool DeleteAsnyCliente(int id);
         Cliente GetAsnyCliente(int id);
-        IEnumerable<Cliente> GetAsnyClientes();
+        Task<IEnumerable<Cliente>> GetAsnyClientes();
+        
     }
 }

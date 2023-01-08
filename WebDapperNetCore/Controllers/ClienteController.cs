@@ -6,7 +6,7 @@ using Service.Contracts;
 
 namespace WebDapperNetCore.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ClienteController : Controller
     {
         public readonly IClienteService _clienteService;
@@ -15,9 +15,9 @@ namespace WebDapperNetCore.Controllers
             _clienteService = clienteService;
         }
         // GET: ClienteController
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var result = _clienteService.GetAsnyClientes();
+            var result = await _clienteService.GetAsnyClientes();
            return View(result);
         }
 

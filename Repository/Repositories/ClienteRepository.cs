@@ -32,13 +32,13 @@ namespace Repository.Repositories
           
         }
 
-        public IEnumerable<Cliente> GetAsnyClientes()
+        public async Task<IEnumerable<Cliente>> GetAsnyClientes()
         {
             string sql = "select IdCliente, Nome from Cliente";
             using (var connectionDb = _connectionFactory.Connection())
             {
                 connectionDb.Open();
-                var resut =   connectionDb.Query<Cliente>(sql);
+                var resut =  await  connectionDb.QueryAsync<Cliente>(sql);
                 return resut;
             }
         }
@@ -46,9 +46,9 @@ namespace Repository.Repositories
         public Cliente InsertAsnyCliente(Cliente cliente)
         {
 
-            var query = "INSERT INTO Clientes (Nome) VALUES (@Nome)"+"SELECT CAST(SCOPE_IDENTITY() as int)";
+            var query = "INSERT INTO Cliente (Nome) VALUES (@Nome)"+"SELECT CAST(SCOPE_IDENTITY() as int)";
             var parameters = new DynamicParameters();
-            parameters.Add("Name", cliente.Nome, DbType.String);
+            parameters.Add("Nome", cliente.Nome, DbType.String);
 
             using (var connectionDb = _connectionFactory.Connection())
             {
